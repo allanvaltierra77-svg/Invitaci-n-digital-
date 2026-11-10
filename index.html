@@ -261,21 +261,11 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  <div class="kicker">RSVP · Confirmación de asistencia</div>
  <h2>Esperamos contar con<br>tu presencia.</h2>
  <p>Por favor confirma tu asistencia a la brevedad posible.</p>
- <form class="form" id="rsvpForm">
-  <label for="guestName">Nombre del invitado</label>
-  <input id="guestName" name="guestName" required placeholder="Escribe tu nombre">
-  <div class="row">
-   <div><label for="adults">Adultos</label><select id="adults"><option>1 adulto</option><option selected>2 adultos</option><option>3 adultos</option><option>4 adultos</option></select></div>
-   <div><label for="children">Niños</label><select id="children"><option>0 niños</option><option selected>1 niño</option><option>2 niños</option><option>3 niños</option></select></div>
-  </div>
-  <div class="choices"><button type="button" class="active" data-attend="Sí asistiré">Sí, asistiré</button><button type="button" data-attend="No podré ir">No podré ir</button></div>
-  <label for="allergies">¿Tienes alguna alergia o requieres algún alimento especial? (opcional)</label>
-  <textarea id="allergies" placeholder="Escribe aquí..."></textarea>
-  <label for="message">Mensaje (opcional)</label>
-  <textarea id="message" placeholder="Déjanos un mensaje..."></textarea>
-  <button class="btn light submit" type="submit">Confirmar</button>
-  <p class="small" id="rsvpNote">Esta es una demostración. Para recibir confirmaciones reales, conectaremos este formulario a WhatsApp o una base de datos.</p>
- </form>
+ <div class="form" style="max-width:700px;margin:28px auto 0;text-align:center">
+  <p>Confirma tu asistencia mediante nuestro formulario.</p>
+  <a class="btn light submit" href="https://docs.google.com/forms/d/e/REEMPLAZAR_ID_FORMULARIO/viewform" target="_blank" rel="noopener">Confirmar asistencia</a>
+  <p class="small">Tu respuesta llegará directamente a los anfitriones.</p>
+ </div>
  <p class="serif" style="font-size:1.7rem;margin-top:45px">¡Gracias por ser parte<br>de este momento!</p>
 </section>
 
@@ -342,22 +332,6 @@ audio.addEventListener('error',()=>{
  musicPanel.classList.add('show');
 });
 audio.addEventListener('ended',()=>{musicButton.textContent='▶ Reproducir';});
-let attendance='Sí asistiré';
-document.querySelectorAll('[data-attend]').forEach(b=>b.addEventListener('click',()=>{
- document.querySelectorAll('[data-attend]').forEach(x=>x.classList.remove('active'));
- b.classList.add('active');attendance=b.dataset.attend;
-}));
-document.getElementById('rsvpForm').addEventListener('submit',e=>{
- e.preventDefault();
- const name=document.getElementById('guestName').value.trim();
- const adults=document.getElementById('adults').value;
- const children=document.getElementById('children').value;
- const allergies=document.getElementById('allergies').value.trim()||'Ninguna indicada';
- const message=document.getElementById('message').value.trim()||'Sin mensaje';
- const summary=`Confirmación Allan & Paty\\nNombre: ${name}\\nRespuesta: ${attendance}\\n${adults}\\n${children}\\nAlergias/alimentos: ${allergies}\\nMensaje: ${message}`;
- if(navigator.share){navigator.share({title:'Confirmación Allan & Paty',text:summary}).catch(()=>alert(summary));}
- else{alert(summary+'\\n\\nPara recibir esta confirmación automáticamente, falta conectar el número de WhatsApp o una base de datos.');}
-});
 </script>
 </body>
 </html>
