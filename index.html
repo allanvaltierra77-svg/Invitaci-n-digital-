@@ -302,7 +302,7 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 </footer>
 
 <button class="music-control" id="musicToggle" type="button" aria-label="Reproducir música" title="Reproducir música">▶</button>
-<audio id="audio" src="assets/music/infinity-piano.mp3" preload="auto" loop playsinline></audio>
+<audio id="audio" src="assets/music/infinity-piano.mp3" preload="none" loop playsinline></audio>
 
 <script>
 // Al abrir el enlace compartido, comenzar siempre desde la portada.
@@ -353,12 +353,8 @@ async function toggleMusic(){
 musicToggle.addEventListener('click',toggleMusic);
 audio.addEventListener('play',syncMusicButton);
 audio.addEventListener('pause',syncMusicButton);
-// Intentar reproducir al abrir. Si el navegador lo bloquea, el botón queda en ▶.
-window.addEventListener('load',async()=>{
- try{await audio.play();}
- catch(err){/* La persona puede iniciar la música tocando el botón ▶. */}
- syncMusicButton();
-});
+// No descargar ni iniciar el audio al abrir: la música comienza solo al tocar el botón.
+syncMusicButton();
 </script>
 </body>
 </html>
