@@ -1,0 +1,10 @@
+GLOW HOUSE — Invitación Allan & Paty
+
+Sube index.html y la carpeta assets completa al mismo nivel en GitHub Pages.
+Conserva todas las fotografías y assets/music/infinity-piano.mp3 con sus nombres.
+
+La invitación intenta iniciar la música al cargar. Algunos navegadores bloquean el audio automático;
+si ocurre, el invitado deberá tocar el botón musical una vez para activarlo.
+
+Ceremonia: Basílica Colegiata de Nuestra Señora de Guanajuato, Plaza de la Paz 7, Zona Centro.
+Recepción: San Martín, Yerbabuena, S/N, Guanajuato, Gto.
