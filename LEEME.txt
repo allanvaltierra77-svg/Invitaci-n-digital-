@@ -1,4 +1,4 @@
-GLOW HOUSE — Invitación Allan & Paty
+FOREVER VISUAL — Invitación Allan & Paty
 
 Sube index.html y la carpeta assets completa al mismo nivel en GitHub Pages.
 Conserva todas las fotografías y assets/music/infinity-piano.mp3 con sus nombres.
