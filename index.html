@@ -111,6 +111,15 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 .cover .kicker,.cover h1,.cover .date{color:#59633b;text-align:center}
 .cover h1{width:100%;font-size:clamp(3.5rem,15vw,7rem);line-height:1.05;margin:14px auto 8px}
 .cover .date{margin:12px auto 30px}
+/* Ajuste visual: recuadro más transparente y ligeramente más abajo */
+.cover-inner{
+ background:rgba(238,231,216,.60);
+ border:1px solid rgba(185,173,131,.55);
+ backdrop-filter:blur(1.5px);
+ -webkit-backdrop-filter:blur(1.5px);
+ transform:translateY(6vh);
+ box-shadow:0 10px 32px rgba(65,69,45,.08);
+}
 .countdown,.gifts,.rsvp,.footer{background:#eee7d8!important;color:#59633b!important}
 .countdown .kicker,.gifts .kicker,.rsvp .kicker,.form label,.count-unit span,.count-unit strong,.footer h2,.footer p{color:#59633b!important}
 .ticket-head{background:#59633b;color:#f8f4e9}
@@ -278,6 +287,14 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 <audio id="audio" src="assets/music/infinity-piano.mp3" preload="auto" loop playsinline></audio>
 
 <script>
+// Al abrir el enlace compartido, comenzar siempre desde la portada.
+// Los enlaces internos siguen funcionando normalmente después de cargar.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (window.location.hash) {
+ history.replaceState(null, document.title, window.location.pathname + window.location.search);
+}
+window.scrollTo(0, 0);
+
 const eventDate = new Date('2027-02-05T15:00:00');
 function updateCountdown(){
  const now = new Date(); let diff = Math.max(0,eventDate-now);
