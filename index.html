@@ -113,12 +113,16 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 .cover .date{margin:12px auto 30px}
 /* Ajuste visual: recuadro más transparente y ligeramente más abajo */
 .cover-inner{
- background:rgba(238,231,216,.60);
- border:1px solid rgba(185,173,131,.55);
- backdrop-filter:blur(1.5px);
- -webkit-backdrop-filter:blur(1.5px);
+ background:rgba(238,231,216,.38);
+ border:1px solid rgba(185,173,131,.35);
+ backdrop-filter:blur(1px);
+ -webkit-backdrop-filter:blur(1px);
  transform:translateY(6vh);
- box-shadow:0 10px 32px rgba(65,69,45,.08);
+ box-shadow:0 10px 32px rgba(65,69,45,.05);
+}
+.cover-inner > *{
+ position:relative;
+ top:14px;
 }
 .countdown,.gifts,.rsvp,.footer{background:#eee7d8!important;color:#59633b!important}
 .countdown .kicker,.gifts .kicker,.rsvp .kicker,.form label,.count-unit span,.count-unit strong,.footer h2,.footer p{color:#59633b!important}
