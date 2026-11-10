@@ -113,7 +113,7 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 .cover .date{margin:12px auto 30px}
 /* Ajuste visual: recuadro más transparente y ligeramente más abajo */
 .cover-inner{
- background:rgba(238,231,216,.38);
+ background:rgba(238,231,216,.30);
  border:1px solid rgba(185,173,131,.35);
  backdrop-filter:blur(1px);
  -webkit-backdrop-filter:blur(1px);
@@ -122,8 +122,16 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 }
 .cover-inner > *{
  position:relative;
- top:14px;
+ top:24px;
 }
+/* Mayor contraste para nombres y textos de portada */
+.cover .cover-inner .kicker,
+.cover .cover-inner h1,
+.cover .cover-inner .date{
+ color:#303b1d !important;
+ text-shadow:0 1px 1px rgba(248,244,233,.72);
+}
+
 .countdown,.gifts,.rsvp,.footer{background:#eee7d8!important;color:#59633b!important}
 .countdown .kicker,.gifts .kicker,.rsvp .kicker,.form label,.count-unit span,.count-unit strong,.footer h2,.footer p{color:#59633b!important}
 .ticket-head{background:#59633b;color:#f8f4e9}
