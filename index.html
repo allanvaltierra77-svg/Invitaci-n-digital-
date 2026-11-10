@@ -64,9 +64,9 @@ p{line-height:1.8}
 .form .choices button{color:#fdfbf4;border:1px solid #c6bd9d;border-radius:40px;background:transparent;padding:15px;letter-spacing:.12em;cursor:pointer}
 .form .choices button.active{background:#fdfbf4;color:var(--wine)}
 .form .submit{width:100%;margin-top:18px}
-.music-control{position:fixed;right:18px;bottom:20px;z-index:20;width:58px;height:58px;border-radius:50%;border:0;background:#7b8352;color:white;box-shadow:0 8px 25px #281a2833;font-size:1.3rem;cursor:pointer}
-.music-panel{position:fixed;right:18px;bottom:88px;z-index:20;background:#fdfbf4;color:var(--wine);padding:12px 14px;border-radius:14px;box-shadow:0 8px 30px #281a2833;display:none;font-size:.8rem}
-.music-panel.show{display:block}.music-panel input{max-width:180px}
+.music-control{position:fixed;right:18px;bottom:20px;z-index:20;width:58px;height:58px;border-radius:50%;border:0;background:#7b8352;color:white;box-shadow:0 8px 25px #281a2833;font-size:1.15rem;display:grid;place-items:center;cursor:pointer;transition:transform .18s ease,background .18s ease}
+.music-control:hover{transform:scale(1.06)}
+.music-control:focus-visible{outline:3px solid #b9ad83;outline-offset:4px}
 .footer{background:linear-gradient(135deg,#4b5532,#697345);color:#fdfbf4;padding:75px 20px;text-align:center}
 .footer h2{font-size:clamp(2.5rem,9vw,4rem)}
 .small{font-size:.78rem;opacity:.78}
@@ -122,7 +122,6 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 .form .choices button{color:#59633b;border-color:#a6a17b}
 .form .choices button.active{background:#59633b;color:#f8f4e9}
 .btn,.btn.light,.btn.wine{background:transparent;color:#59633b;border-color:#59633b}
-.music-panel{color:#59633b;background:#f8f4e9}
 .footer{border-top:1px solid #c6bd9d}
 </style>
 </head>
@@ -276,14 +275,8 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  <p class="small">Invitaciones digitales personalizadas</p>
 </footer>
 
-<button class="music-control" id="musicToggle" aria-label="Reproducir o pausar nuestra canción" title="Nuestra canción">♫</button>
-<div class="music-panel" id="musicPanel" role="status" aria-live="polite">
- <strong>Nuestra canción</strong><br>
- <span>Allan &amp; Paty · Toca para escuchar</span>
- <div style="margin-top:8px"><button id="playPause" class="btn wine" type="button">▶ Reproducir</button></div>
- <span class="small" id="musicStatus">Intentando iniciar la música automáticamente…</span>
- <audio id="audio" src="assets/music/infinity-piano.mp3" preload="auto" loop playsinline></audio>
-</div>
+<button class="music-control" id="musicToggle" type="button" aria-label="Reproducir música" title="Reproducir música">▶</button>
+<audio id="audio" src="assets/music/infinity-piano.mp3" preload="auto" loop playsinline></audio>
 
 <script>
 const eventDate = new Date('2027-02-05T15:00:00');
@@ -306,32 +299,32 @@ document.getElementById('calendarBtn').addEventListener('click',()=>{
  const a=document.createElement('a');a.href=url;a.download='Allan-y-Paty.ics';a.click();URL.revokeObjectURL(url);
 });
 
-const musicPanel=document.getElementById('musicPanel'),audio=document.getElementById('audio');
-const musicButton=document.getElementById('playPause'),musicStatus=document.getElementById('musicStatus');
-document.getElementById('musicToggle').addEventListener('click',()=>musicPanel.classList.toggle('show'));
+const audio=document.getElementById('audio');
+const musicToggle=document.getElementById('musicToggle');
+function syncMusicButton(){
+ const playing=!audio.paused;
+ musicToggle.textContent=playing?'Ⅱ':'▶';
+ musicToggle.setAttribute('aria-label',playing?'Pausar música':'Reproducir música');
+ musicToggle.title=playing?'Pausar música':'Reproducir música';
+}
 async function toggleMusic(){
  if(audio.paused){
-  try{await audio.play();musicButton.textContent='Ⅱ Pausar';musicStatus.textContent='Reproduciendo nuestra canción';}
-  catch(err){musicStatus.textContent='No se pudo iniciar automáticamente. Toca reproducir para escuchar nuestra canción.';musicPanel.classList.add('show');}
- }else{audio.pause();musicButton.textContent='▶ Reproducir';musicStatus.textContent='Música en pausa';}
-}
-musicButton.addEventListener('click',toggleMusic);
-// Intentar reproducir al abrir. Los navegadores pueden bloquear audio sin interacción.
-window.addEventListener('load',async()=>{
- try{
-  await audio.play();
-  musicButton.textContent='Ⅱ Pausar';
-  musicStatus.textContent='Reproduciendo nuestra canción';
- }catch(err){
-  musicStatus.textContent='Tu navegador bloqueó el inicio automático. Toca aquí para escuchar.';
-  musicPanel.classList.add('show');
+  try{await audio.play();}
+  catch(err){/* El navegador puede bloquear la reproducción hasta una interacción válida. */}
+ }else{
+  audio.pause();
  }
+ syncMusicButton();
+}
+musicToggle.addEventListener('click',toggleMusic);
+audio.addEventListener('play',syncMusicButton);
+audio.addEventListener('pause',syncMusicButton);
+// Intentar reproducir al abrir. Si el navegador lo bloquea, el botón queda en ▶.
+window.addEventListener('load',async()=>{
+ try{await audio.play();}
+ catch(err){/* La persona puede iniciar la música tocando el botón ▶. */}
+ syncMusicButton();
 });
-audio.addEventListener('error',()=>{
- musicStatus.textContent='No se pudo cargar la canción. Revisa que el archivo esté en assets/music/.';
- musicPanel.classList.add('show');
-});
-audio.addEventListener('ended',()=>{musicButton.textContent='▶ Reproducir';});
 </script>
 </body>
 </html>
