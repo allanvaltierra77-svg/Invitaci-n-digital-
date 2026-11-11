@@ -307,7 +307,7 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  <p>Por favor confirma tu asistencia a la brevedad posible.</p>
  <div class="form rsvp-form-wrap" style="max-width:650px;margin:28px auto 0;text-align:left">
   <p style="text-align:center">Nos encantará saber si nos acompañarás.</p>
-  <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbzWmobZ5dfjK9wqKC6pI7Vzd8zI2j4phorrNO6I7ol3TDzGkfRR8B-MDBwtKGEr4m5N/exec" method="POST" target="rsvpResponseFrame">
+  <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbxqJEVimFApRs3vOIve3YzCwQWKCwa2nqHLwGembGOwkKtRwblAgg7zZ240pXvRkvd8/exec" method="POST" target="rsvpResponseFrame">
    <label for="rsvpNombre">Nombre completo</label>
    <input id="rsvpNombre" name="nombre" type="text" autocomplete="name" placeholder="Escribe tu nombre y apellidos" required maxlength="120">
    <p class="small rsvp-note">Importante: ingresa tu nombre completo para que podamos identificarte correctamente.</p>
@@ -344,7 +344,7 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 </footer>
 
 <button class="music-control" id="musicToggle" type="button" aria-label="Reproducir música" title="Reproducir música">▶</button>
-<audio id="audio" src="assets/music/infinity-piano.mp3" preload="none" loop playsinline></audio>
+<audio id="audio" src="assets/music/infinity-piano.mp3" preload="auto" autoplay loop playsinline></audio>
 
 <script>
 // Al abrir el enlace compartido, comenzar siempre desde la portada.
@@ -383,18 +383,54 @@ function syncMusicButton(){
  musicToggle.setAttribute('aria-label',playing?'Pausar música':'Reproducir música');
  musicToggle.title=playing?'Pausar música':'Reproducir música';
 }
+async function startMusic(){
+ try{
+  await audio.play();
+  syncMusicButton();
+  return true;
+ }catch(err){
+  syncMusicButton();
+  return false;
+ }
+}
 async function toggleMusic(){
  if(audio.paused){
-  try{await audio.play();}
-  catch(err){/* El navegador puede bloquear la reproducción hasta una interacción válida. */}
+  await startMusic();
  }else{
   audio.pause();
+  syncMusicButton();
  }
- syncMusicButton();
 }
 musicToggle.addEventListener('click',toggleMusic);
 audio.addEventListener('play',syncMusicButton);
 audio.addEventListener('pause',syncMusicButton);
+
+// Intentar reproducir al abrir. Si el navegador bloquea el audio,
+// se iniciará con la primera interacción del invitado.
+startMusic();
+const startOnFirstInteraction = (event) => {
+ if(event.target === musicToggle) return;
+ if(audio.paused){
+  startMusic();
+ }
+ document.removeEventListener('pointerdown',startOnFirstInteraction);
+ document.removeEventListener('keydown',startOnFirstInteraction);
+};
+document.addEventListener('pointerdown',startOnFirstInteraction,{passive:true});
+document.addEventListener('keydown',startOnFirstInteraction);
+
+// Al llegar al final de la invitación, detener la música.
+// El invitado conserva el control para volver a reproducirla con el botón.
+const invitationFooter = document.querySelector('.footer');
+if(invitationFooter && 'IntersectionObserver' in window){
+ const footerObserver = new IntersectionObserver((entries) => {
+  if(entries.some(entry => entry.isIntersecting)){
+   audio.pause();
+   syncMusicButton();
+  }
+ },{threshold:0.25});
+ footerObserver.observe(invitationFooter);
+}
 // Formulario RSVP: envía al Apps Script mediante un iframe oculto.
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpFrame = document.getElementById('rsvpResponseFrame');
