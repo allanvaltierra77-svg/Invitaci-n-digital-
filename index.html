@@ -406,19 +406,14 @@ audio.addEventListener('play',syncMusicButton);
 audio.addEventListener('pause',syncMusicButton);
 
 // Intentar reproducir al abrir. Si el navegador bloquea el audio,
-// se iniciará con la primera interacción del invitado.
+ // el toque en «Abrir invitación» será el disparador directo.
 startMusic();
-const startOnFirstInteraction = (event) => {
- if(event.target === musicToggle) return;
- if(audio.paused){
-  startMusic();
- }
- document.removeEventListener('pointerdown',startOnFirstInteraction);
- document.removeEventListener('keydown',startOnFirstInteraction);
-};
-document.addEventListener('pointerdown',startOnFirstInteraction,{passive:true});
-document.addEventListener('keydown',startOnFirstInteraction);
-
+const openInvitationLink = document.querySelector('a[href="#bienvenida"]');
+if(openInvitationLink){
+ openInvitationLink.addEventListener('click', () => {
+  if(audio.paused) startMusic();
+ });
+}
 // Al llegar al final de la invitación, detener la música.
 // El invitado conserva el control para volver a reproducirla con el botón.
 const invitationFooter = document.querySelector('.footer');
