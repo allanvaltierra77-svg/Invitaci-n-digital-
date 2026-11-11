@@ -149,6 +149,25 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 .form .choices button.active{background:#59633b;color:#f8f4e9}
 .btn,.btn.light,.btn.wine{background:transparent;color:#59633b;border-color:#59633b}
 .footer{border-top:1px solid #c6bd9d}
+
+/* Formulario RSVP integrado a la paleta de la invitación */
+.rsvp-form-wrap{background:rgba(248,244,233,.78);border:1px solid #c6bd9d;border-radius:22px;padding:clamp(20px,5vw,34px);color:#59633b;box-shadow:0 14px 38px rgba(65,69,45,.08)}
+.rsvp-form-wrap>p{color:#59633b}
+.rsvp-form-wrap label{color:#59633b!important;font-weight:600;letter-spacing:.03em}
+.rsvp-form-wrap input[type="text"],.rsvp-form-wrap select,.rsvp-form-wrap textarea{background:#f8f4e9!important;color:#41452d!important;border:1px solid #b9ad83!important;border-radius:12px}
+.rsvp-form-wrap input::placeholder,.rsvp-form-wrap textarea::placeholder{color:#85836b!important}
+.rsvp-note{color:#777b5c!important;margin:7px 0 18px;font-style:italic}
+.rsvp-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 22px}
+.rsvp-choices .rsvp-choice{display:flex;align-items:center;gap:9px;margin:0;padding:13px 12px;border:1px solid #b9ad83;border-radius:14px;background:#f8f4e9;cursor:pointer;font-weight:400}
+.rsvp-choices .rsvp-choice:has(input:checked){background:#59633b;color:#f8f4e9!important;border-color:#59633b}
+.rsvp-choices input[type="radio"]{width:auto;margin:0;padding:0;accent-color:#59633b}
+.rsvp-counts{margin:6px 0 16px}
+.rsvp-form-wrap .submit{background:#59633b!important;color:#f8f4e9!important;border:1px solid #59633b!important}
+.rsvp-form-wrap .submit:disabled{opacity:.65;cursor:wait}
+.rsvp-status{min-height:1.4em;text-align:center;color:#59633b!important;margin:14px 0 0}
+.rsvp-hidden-frame{position:absolute;width:1px;height:1px;border:0;left:-9999px}
+@media(max-width:390px){.rsvp-choices{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -286,21 +305,33 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  <div class="kicker">RSVP · Confirmación de asistencia</div>
  <h2>Esperamos contar con<br>tu presencia.</h2>
  <p>Por favor confirma tu asistencia a la brevedad posible.</p>
- <div class="form" style="max-width:760px;margin:28px auto 0;text-align:center">
-  <p>Nos encantará saber si nos acompañarás. Al llenar el formulario, escribe tu nombre y apellidos completos.</p>
-  <p class="small" style="margin:0 0 18px">Importante: ingresa tu nombre completo para que podamos identificarte correctamente.</p>
-  <div style="width:100%;overflow:hidden;border-radius:14px;background:#f8f4e9">
-   <iframe
-    title="Formulario de confirmación de asistencia de Allan y Paty"
-    src="https://docs.google.com/forms/d/e/1FAIpQLSe4xY8DPBm2u3H71rympArrlbyspeRdA7xum6YRhsEfkegNTA/viewform?embedded=true"
-    width="100%"
-    height="1100"
-    frameborder="0"
-    marginheight="0"
-    marginwidth="0"
-    loading="lazy">Cargando formulario…</iframe>
-  </div>
-  <p class="small">Tu respuesta llegará directamente a los anfitriones.</p>
+ <div class="form rsvp-form-wrap" style="max-width:650px;margin:28px auto 0;text-align:left">
+  <p style="text-align:center">Nos encantará saber si nos acompañarás.</p>
+  <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbzWmobZ5dfjK9wqKC6pI7Vzd8zI2j4phorrNO6I7ol3TDzGkfRR8B-MDBwtKGEr4m5N/exec" method="POST" target="rsvpResponseFrame">
+   <label for="rsvpNombre">Nombre completo</label>
+   <input id="rsvpNombre" name="nombre" type="text" autocomplete="name" placeholder="Escribe tu nombre y apellidos" required maxlength="120">
+   <p class="small rsvp-note">Importante: ingresa tu nombre completo para que podamos identificarte correctamente.</p>
+   <label>¿Nos acompañarás?</label>
+   <div class="choices rsvp-choices">
+    <label class="rsvp-choice"><input type="radio" name="asistencia" value="SI" required><span>Sí, asistiré ♡</span></label>
+    <label class="rsvp-choice"><input type="radio" name="asistencia" value="NO" required><span>No podré asistir</span></label>
+   </div>
+   <div id="rsvpCounts" class="rsvp-counts">
+    <div class="row">
+     <div><label for="rsvpAdultos">¿Cuántos adultos asistirán?</label>
+      <select id="rsvpAdultos" name="adultos" required><option value="1" selected>1 adulto</option><option value="2">2 adultos</option><option value="3">3 adultos</option><option value="4">4 adultos</option></select>
+     </div>
+     <div><label for="rsvpNinos">¿Cuántos niños asistirán?</label>
+      <select id="rsvpNinos" name="ninos" required><option value="0" selected>0 niños</option><option value="1">1 niño</option><option value="2">2 niños</option><option value="3">3 niños</option><option value="4">4 niños</option></select>
+     </div>
+    </div>
+   </div>
+   <label for="rsvpMensaje">¿Quieres dejarnos un mensaje? (opcional)</label>
+   <textarea id="rsvpMensaje" name="mensaje" placeholder="Escribe unas palabras para Allan y Paty" maxlength="1000"></textarea>
+   <button class="btn wine submit" id="rsvpSubmit" type="submit">Enviar confirmación</button>
+   <p id="rsvpStatus" class="small rsvp-status" role="status" aria-live="polite"></p>
+  </form>
+  <iframe name="rsvpResponseFrame" id="rsvpResponseFrame" title="Envío de confirmación" class="rsvp-hidden-frame"></iframe>
  </div>
  <p class="serif" style="font-size:1.7rem;margin-top:45px">¡Gracias por ser parte<br>de este momento!</p>
 </section>
@@ -364,6 +395,58 @@ async function toggleMusic(){
 musicToggle.addEventListener('click',toggleMusic);
 audio.addEventListener('play',syncMusicButton);
 audio.addEventListener('pause',syncMusicButton);
+// Formulario RSVP: envía al Apps Script mediante un iframe oculto.
+const rsvpForm = document.getElementById('rsvpForm');
+const rsvpFrame = document.getElementById('rsvpResponseFrame');
+const rsvpStatus = document.getElementById('rsvpStatus');
+const rsvpSubmit = document.getElementById('rsvpSubmit');
+const rsvpCounts = document.getElementById('rsvpCounts');
+const rsvpAdultos = document.getElementById('rsvpAdultos');
+const rsvpNinos = document.getElementById('rsvpNinos');
+let rsvpWaiting = false;
+let rsvpFrameReady = false;
+
+rsvpFrame.addEventListener('load', () => {
+ if (!rsvpFrameReady) { rsvpFrameReady = true; return; }
+ if (!rsvpWaiting) return;
+ rsvpWaiting = false;
+ rsvpStatus.textContent = 'Gracias por estar en estos momentos a nuestro lado. Tu respuesta ha sido enviada. Con cariño, Allan y Paty.';
+ rsvpForm.reset();
+ rsvpCounts.hidden = false;
+ rsvpAdultos.value = '1';
+ rsvpNinos.value = '0';
+ rsvpSubmit.disabled = false;
+ rsvpSubmit.textContent = 'Enviar confirmación';
+});
+
+document.querySelectorAll('input[name="asistencia"]').forEach((radio) => {
+ radio.addEventListener('change', () => {
+  const selectedNo = document.querySelector('input[name="asistencia"][value="NO"]').checked;
+  rsvpCounts.hidden = selectedNo;
+  if (selectedNo) {
+   rsvpAdultos.value = '0';
+   rsvpNinos.value = '0';
+  } else if (rsvpAdultos.value === '0') {
+   rsvpAdultos.value = '1';
+  }
+ });
+});
+
+rsvpForm.addEventListener('submit', () => {
+ const selected = document.querySelector('input[name="asistencia"]:checked');
+ if (selected && selected.value === 'NO') {
+  rsvpAdultos.value = '0';
+  rsvpNinos.value = '0';
+ }
+ rsvpWaiting = true;
+ rsvpSubmit.disabled = true;
+ rsvpSubmit.textContent = 'Enviando…';
+ rsvpStatus.textContent = 'Estamos enviando tu confirmación…';
+});
+
+// Inicializar el iframe antes de que el invitado pueda enviar.
+rsvpFrame.src = 'about:blank';
+
 // No descargar ni iniciar el audio al abrir: la música comienza solo al tocar el botón.
 syncMusicButton();
 </script>
