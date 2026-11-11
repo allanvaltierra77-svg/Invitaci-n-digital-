@@ -472,18 +472,22 @@ rsvpFrame.addEventListener('load', () => {
  }, 5000);
 });
 
+function syncRsvpAttendanceFields(){
+ const selectedNo = document.querySelector('input[name="asistencia"][value="NO"]').checked;
+ rsvpCounts.hidden = selectedNo;
+ rsvpAdultos.required = !selectedNo;
+ rsvpNinos.required = !selectedNo;
+ if (selectedNo) {
+  rsvpAdultos.value = '0';
+  rsvpNinos.value = '0';
+ } else if (rsvpAdultos.value === '0') {
+  rsvpAdultos.value = '1';
+ }
+}
 document.querySelectorAll('input[name="asistencia"]').forEach((radio) => {
- radio.addEventListener('change', () => {
-  const selectedNo = document.querySelector('input[name="asistencia"][value="NO"]').checked;
-  rsvpCounts.hidden = selectedNo;
-  if (selectedNo) {
-   rsvpAdultos.value = '0';
-   rsvpNinos.value = '0';
-  } else if (rsvpAdultos.value === '0') {
-   rsvpAdultos.value = '1';
-  }
- });
+ radio.addEventListener('change', syncRsvpAttendanceFields);
 });
+syncRsvpAttendanceFields();
 
 rsvpForm.addEventListener('submit', () => {
  const selected = document.querySelector('input[name="asistencia"]:checked');
