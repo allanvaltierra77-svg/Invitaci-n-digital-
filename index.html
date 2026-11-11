@@ -453,6 +453,16 @@ rsvpFrame.addEventListener('load', () => {
  rsvpNinos.value = '0';
  rsvpSubmit.disabled = false;
  rsvpSubmit.textContent = 'Enviar confirmación';
+
+ // Dar tiempo para leer el agradecimiento y después volver a la portada.
+ window.setTimeout(() => {
+  const invitationCover = document.getElementById('inicio');
+  if (invitationCover) {
+   invitationCover.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+   window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+ }, 5000);
 });
 
 document.querySelectorAll('input[name="asistencia"]').forEach((radio) => {
