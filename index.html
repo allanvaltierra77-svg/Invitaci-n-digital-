@@ -306,29 +306,29 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  <h2>Esperamos contar con<br>tu presencia.</h2>
  <p>Por favor confirma tu asistencia a la brevedad posible.</p>
  <div class="form rsvp-form-wrap" style="max-width:650px;margin:28px auto 0;text-align:left">
-  <p style="text-align:center">Nos encantará saber si nos acompañarás.</p>
+  <p style="text-align:center">Nos hará muy felices saber si podremos contar contigo.</p>
   <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbxqJEVimFApRs3vOIve3YzCwQWKCwa2nqHLwGembGOwkKtRwblAgg7zZ240pXvRkvd8/exec" method="POST" target="rsvpResponseFrame">
-   <label for="rsvpNombre">Nombre completo</label>
+   <label for="rsvpNombre">¿Cuál es tu nombre completo?</label>
    <input id="rsvpNombre" name="nombre" type="text" autocomplete="name" placeholder="Escribe tu nombre y apellidos" required maxlength="120">
-   <p class="small rsvp-note">Importante: ingresa tu nombre completo para que podamos identificarte correctamente.</p>
-   <label>¿Nos acompañarás?</label>
+   <p class="small rsvp-note">Así podremos identificar tu confirmación y recibirte como mereces.</p>
+   <label>¿Podremos contar contigo?</label>
    <div class="choices rsvp-choices">
-    <label class="rsvp-choice"><input type="radio" name="asistencia" value="SI" required><span>Sí, asistiré ♡</span></label>
-    <label class="rsvp-choice"><input type="radio" name="asistencia" value="NO" required><span>No podré asistir</span></label>
+    <label class="rsvp-choice"><input type="radio" name="asistencia" value="SI" required><span>¡Sí, ahí estaré! ♡</span></label>
+    <label class="rsvp-choice"><input type="radio" name="asistencia" value="NO" required><span>En esta ocasión no podré acompañarlos</span></label>
    </div>
    <div id="rsvpCounts" class="rsvp-counts">
     <div class="row">
-     <div><label for="rsvpAdultos">¿Cuántos adultos asistirán?</label>
+     <div><label for="rsvpAdultos">¿Cuántas personas adultas asistirán?</label>
       <select id="rsvpAdultos" name="adultos" required><option value="1" selected>1 adulto</option><option value="2">2 adultos</option><option value="3">3 adultos</option><option value="4">4 adultos</option></select>
      </div>
-     <div><label for="rsvpNinos">¿Cuántos niños asistirán?</label>
+     <div><label for="rsvpNinos">¿Cuántos pequeños les acompañarán?</label>
       <select id="rsvpNinos" name="ninos" required><option value="0" selected>0 niños</option><option value="1">1 niño</option><option value="2">2 niños</option><option value="3">3 niños</option><option value="4">4 niños</option></select>
      </div>
     </div>
    </div>
-   <label for="rsvpMensaje">¿Quieres dejarnos un mensaje? (opcional)</label>
-   <textarea id="rsvpMensaje" name="mensaje" placeholder="Escribe unas palabras para Allan y Paty" maxlength="1000"></textarea>
-   <button class="btn wine submit" id="rsvpSubmit" type="submit">Enviar confirmación</button>
+   <label for="rsvpMensaje">Déjanos unas palabras para recordar este día</label>
+   <textarea id="rsvpMensaje" name="mensaje" placeholder="Comparte aquí tus buenos deseos para Allan y Paty" maxlength="1000"></textarea>
+   <button class="btn wine submit" id="rsvpSubmit" type="submit">Enviar mi respuesta</button>
    <p id="rsvpStatus" class="small rsvp-status" role="status" aria-live="polite"></p>
   </form>
   <iframe name="rsvpResponseFrame" id="rsvpResponseFrame" title="Envío de confirmación" class="rsvp-hidden-frame"></iframe>
@@ -446,7 +446,7 @@ rsvpFrame.addEventListener('load', () => {
  if (!rsvpFrameReady) { rsvpFrameReady = true; return; }
  if (!rsvpWaiting) return;
  rsvpWaiting = false;
- rsvpStatus.textContent = 'Gracias por estar en estos momentos a nuestro lado. Tu respuesta ha sido enviada. Con cariño, Allan y Paty.';
+ rsvpStatus.textContent = '¡Muchas gracias por compartir este momento con nosotros! Hemos recibido tu respuesta. Con cariño, Allan y Paty.';
  rsvpForm.reset();
  rsvpCounts.hidden = false;
  rsvpAdultos.value = '1';
