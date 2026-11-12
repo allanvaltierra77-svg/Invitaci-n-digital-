@@ -356,7 +356,7 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 </footer>
 
 <button class="music-control" id="musicToggle" type="button" aria-label="Reproducir música" title="Reproducir música">▶</button>
-<audio id="audio" src="assets/music/infinity-piano.mp3" preload="auto" autoplay loop playsinline></audio>
+<audio id="audio" src="assets/music/infinity-piano.mp3" preload="auto" loop playsinline></audio>
 
 <script>
 // Al abrir el enlace compartido, comenzar siempre desde la portada.
@@ -417,26 +417,25 @@ musicToggle.addEventListener('click',toggleMusic);
 audio.addEventListener('play',syncMusicButton);
 audio.addEventListener('pause',syncMusicButton);
 
-// Intentar reproducir al abrir. Si el navegador bloquea el audio,
- // el toque en «Abrir invitación» será el disparador directo.
-startMusic();
+// La música comienza únicamente cuando el invitado pulsa «Abrir invitación».
+// Cada apertura reinicia la canción desde el segundo cero.
 const openInvitationLink = document.querySelector('a[href="#bienvenida"]');
 if(openInvitationLink){
  openInvitationLink.addEventListener('click', () => {
-  if(audio.paused) startMusic();
+  audio.currentTime = 0;
+  startMusic();
  });
 }
-// Al llegar al final de la invitación, detener la música.
-// El invitado conserva el control para volver a reproducirla con el botón.
-const invitationFooter = document.querySelector('.footer');
-if(invitationFooter && 'IntersectionObserver' in window){
- const footerObserver = new IntersectionObserver((entries) => {
+// Al entrar a la sección de confirmación, detener la música para llenar el registro.
+const rsvpSection = document.getElementById('confirmar');
+if(rsvpSection && 'IntersectionObserver' in window){
+ const rsvpObserver = new IntersectionObserver((entries) => {
   if(entries.some(entry => entry.isIntersecting)){
    audio.pause();
    syncMusicButton();
   }
- },{threshold:0.25});
- footerObserver.observe(invitationFooter);
+ },{threshold:0.15});
+ rsvpObserver.observe(rsvpSection);
 }
 // Formulario RSVP: envía al Apps Script mediante un iframe oculto.
 const rsvpForm = document.getElementById('rsvpForm');
@@ -490,6 +489,9 @@ document.querySelectorAll('input[name="asistencia"]').forEach((radio) => {
 syncRsvpAttendanceFields();
 
 rsvpForm.addEventListener('submit', () => {
+ // Mantener la música detenida durante y después del envío del registro.
+ audio.pause();
+ syncMusicButton();
  const selected = document.querySelector('input[name="asistencia"]:checked');
  if (selected && selected.value === 'NO') {
   rsvpAdultos.value = '0';
@@ -504,7 +506,7 @@ rsvpForm.addEventListener('submit', () => {
 // Inicializar el iframe antes de que el invitado pueda enviar.
 rsvpFrame.src = 'about:blank';
 
-// No descargar ni iniciar el audio al abrir: la música comienza solo al tocar el botón.
+// No iniciar la música automáticamente al cargar la página.
 syncMusicButton();
 </script>
 </body>
