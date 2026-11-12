@@ -426,17 +426,7 @@ if(openInvitationLink){
   startMusic();
  });
 }
-// Al entrar a la sección de confirmación, detener la música para llenar el registro.
-const rsvpSection = document.getElementById('confirmar');
-if(rsvpSection && 'IntersectionObserver' in window){
- const rsvpObserver = new IntersectionObserver((entries) => {
-  if(entries.some(entry => entry.isIntersecting)){
-   audio.pause();
-   syncMusicButton();
-  }
- },{threshold:0.15});
- rsvpObserver.observe(rsvpSection);
-}
+// La música continúa durante el registro y se detiene al pulsar «Enviar mi respuesta».
 // Formulario RSVP: envía al Apps Script mediante un iframe oculto.
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpFrame = document.getElementById('rsvpResponseFrame');
