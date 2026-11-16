@@ -177,6 +177,32 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 .rsvp-hidden-frame{position:absolute;width:1px;height:1px;border:0;left:-9999px}
 @media(max-width:390px){.rsvp-choices{grid-template-columns:1fr}}
 
+
+/* Itinerario elegante con tela fluida y paleta verde olivo */
+.itinerary-section{isolation:isolate;position:relative;min-height:720px;padding:clamp(72px,10vw,110px) 22px;background:#f5f0e4!important;color:#41452d!important;overflow:hidden}
+.itinerary-content{position:relative;z-index:2;max-width:760px;margin:auto;padding:clamp(24px,5vw,54px) clamp(14px,4vw,38px);border:1px solid rgba(89,99,59,.28);background:rgba(248,244,233,.78);box-shadow:0 18px 55px rgba(65,69,45,.08)}
+.itinerary-names{font:italic clamp(2.7rem,10vw,5rem) Georgia,serif;color:#4b572c;line-height:1.05}
+.itinerary-names span{font-size:.62em}
+.itinerary-kicker{margin-top:18px;letter-spacing:.3em;text-transform:uppercase;font-size:.68rem;color:#737b4d}
+.itinerary-section h2{font-size:clamp(2.4rem,8vw,3.8rem);margin:8px 0;color:#4b572c}
+.itinerary-rings{font-size:2.2rem;color:#8a8959;line-height:1.2}
+.itinerary-rule{color:#8a8959;letter-spacing:.5em;margin:12px auto 28px}
+.itinerary-list{max-width:590px;margin:0 auto;text-align:left;position:relative}
+.itinerary-list:before{content:"";position:absolute;left:32px;top:35px;bottom:35px;width:1px;background:#9a9a68}
+.itinerary-event{position:relative;display:grid;grid-template-columns:66px 1fr;gap:18px;align-items:start;padding:18px 0}
+.itinerary-symbol{position:relative;z-index:1;width:64px;height:64px;display:grid;place-items:center;border:1px solid #7b8352;border-radius:50%;background:#f5f0e4;color:#59633b;font-size:1.65rem}
+.itinerary-detail h3{display:inline-block;margin:0 0 8px;padding:3px 15px;background:#e4e3cf;color:#4b572c;font-size:clamp(1.55rem,5vw,2rem);font-style:italic}
+.itinerary-time{font:1.55rem Georgia,serif;color:#41452d;margin:3px 0}
+.itinerary-detail p{margin:4px 0 0;color:#41452d;font:1.08rem/1.5 Georgia,serif}
+.itinerary-end{margin-top:26px;color:#737b4d;font-size:1.8rem}
+.itinerary-drape{position:absolute;z-index:1;pointer-events:none;filter:drop-shadow(0 12px 18px rgba(39,47,23,.16))}
+.itinerary-drape-top{left:-8%;top:-4%;width:48%;height:210px;border-radius:0 0 75% 18%;transform:rotate(-8deg);background:linear-gradient(145deg,#303c20 0%,#59633b 42%,#899064 68%,#46512c 100%);animation:olive-fabric 8s ease-in-out infinite alternate}
+.itinerary-drape-side{right:-12%;bottom:-5%;width:36%;height:68%;border-radius:65% 0 0 30%;transform:rotate(8deg);background:linear-gradient(105deg,#354222 0%,#657044 40%,#899064 62%,#414d29 100%);animation:olive-fabric 10s ease-in-out infinite alternate-reverse}
+.itinerary-drape:after{content:"";position:absolute;inset:8% 15%;border-left:2px solid rgba(226,224,191,.18);border-radius:50%;transform:rotate(12deg)}
+@keyframes olive-fabric{from{translate:0 0;rotate:-1deg}to{translate:8px 10px;rotate:1.5deg}}
+@media(max-width:520px){.itinerary-section{padding:66px 15px}.itinerary-content{padding:26px 15px}.itinerary-drape-top{width:58%;height:145px}.itinerary-drape-side{width:30%;height:55%;right:-17%}.itinerary-event{grid-template-columns:54px 1fr;gap:12px}.itinerary-symbol{width:52px;height:52px}.itinerary-list:before{left:26px}.itinerary-detail p{font-size:1rem}}
+@media(prefers-reduced-motion:reduce){.itinerary-drape{animation:none}}
+
 </style>
 </head>
 <body>
@@ -287,12 +313,30 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  <a class="btn light" href="https://www.amazon.com.mx/" target="_blank" rel="noopener" style="margin:8px">Amazon</a>
 </section>
 
-<section class="paper">
- <div class="kicker">Acompáñanos en cada momento</div><h2>Itinerario</h2><div class="rule"></div>
- <div class="timeline">
-  <div class="timeline-item"><div class="timeline-icon">♧</div><div><h3>Horario por confirmar</h3><p>Ceremonia</p></div></div>
-  <div class="timeline-item"><div class="timeline-icon">♡</div><div><h3>Horario por confirmar</h3><p>Recepción</p></div></div>
-  <div class="timeline-item"><div class="timeline-icon">✧</div><div><h3>Más momentos</h3><p>Cena, brindis y celebración</p></div></div>
+<section class="paper itinerary-section" id="itinerario">
+ <div class="itinerary-drape itinerary-drape-top" aria-hidden="true"></div>
+ <div class="itinerary-drape itinerary-drape-side" aria-hidden="true"></div>
+ <div class="itinerary-content">
+  <div class="itinerary-rings" aria-hidden="true">♡</div>
+  <div class="itinerary-names">Allan <span>&</span> Paty</div>
+  <div class="itinerary-kicker">Nuestro día especial</div>
+  <h2>Itinerario</h2>
+  <div class="itinerary-rule" aria-hidden="true">✦</div>
+  <div class="itinerary-list">
+   <article class="itinerary-event">
+    <div class="itinerary-symbol" aria-hidden="true">♧</div>
+    <div class="itinerary-detail"><h3>Ceremonia</h3><div class="itinerary-time">12:00 pm</div><p>Nuestra Señora de Guanajuato, Basílica</p></div>
+   </article>
+   <article class="itinerary-event">
+    <div class="itinerary-symbol" aria-hidden="true">♡</div>
+    <div class="itinerary-detail"><h3>Recepción</h3><div class="itinerary-time">16:00</div><p>Salón Luna Barrón<br>Yerbabuena s/n</p></div>
+   </article>
+   <article class="itinerary-event">
+    <div class="itinerary-symbol" aria-hidden="true">♫</div>
+    <div class="itinerary-detail"><h3>Más momentos</h3><div class="itinerary-time">18:00</div><p>En el mismo lugar</p></div>
+   </article>
+  </div>
+  <div class="itinerary-end" aria-hidden="true">♡</div>
  </div>
 </section>
 
