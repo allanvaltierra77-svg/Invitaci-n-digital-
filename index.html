@@ -203,6 +203,28 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
 @media(max-width:520px){.itinerary-section{padding:66px 15px}.itinerary-content{padding:26px 15px}.itinerary-drape-top{width:58%;height:145px}.itinerary-drape-side{width:30%;height:55%;right:-17%}.itinerary-event{grid-template-columns:54px 1fr;gap:12px}.itinerary-symbol{width:52px;height:52px}.itinerary-list:before{left:26px}.itinerary-detail p{font-size:1rem}}
 @media(prefers-reduced-motion:reduce){.itinerary-drape{animation:none}}
 
+
+/* Código de vestimenta original · Forever Visual */
+.dresscode-section{padding:clamp(54px,8vw,92px) 16px;background:#f2ecdf!important}
+.dresscode-frame{position:relative;max-width:760px;margin:auto;padding:clamp(26px,5vw,54px) clamp(16px,4vw,42px);border:1px solid #858b5b;background:linear-gradient(145deg,#fbf8ef,#f0e7d5);box-shadow:0 16px 42px rgba(65,69,45,.07)}
+.dresscode-frame:before,.dresscode-frame:after{content:"";position:absolute;width:105px;height:105px;pointer-events:none;opacity:.28;border-color:#858b5b}
+.dresscode-frame:before{top:10px;left:10px;border-top:1px solid;border-left:1px solid}
+.dresscode-frame:after{right:10px;bottom:10px;border-right:1px solid;border-bottom:1px solid}
+.dresscode-frame h2{font-size:clamp(2.05rem,7vw,3.35rem);line-height:1.08;margin:10px 0 16px;color:#41452d}
+.dresscode-divider{display:flex;align-items:center;justify-content:center;gap:15px;color:#858b5b;margin:14px auto 30px}
+.dresscode-divider span{width:min(24vw,125px);height:1px;background:#858b5b}
+.dresscode-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,4vw,32px);align-items:end;max-width:590px;margin:auto}
+.dresscode-card{min-width:0;padding:8px 5px 12px;background:transparent!important}
+.dresscode-art{display:block;width:100%;height:clamp(190px,45vw,285px);max-width:235px;margin:0 auto 12px;color:#59633b}
+.dresscode-label{display:inline-block;min-width:70%;padding:8px 14px;border-radius:30px;background:#e4d7bd;color:#41452d;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase}
+.dresscode-card p{font:italic clamp(1.05rem,3.5vw,1.45rem)/1.35 Georgia,serif;color:#41452d;margin:12px 0 0}
+.dresscode-centerline{display:none}
+.dresscode-palette{display:flex;justify-content:center;gap:clamp(9px,2.5vw,18px);margin:32px auto 16px}
+.dresscode-palette span{display:block;width:clamp(37px,9vw,62px);height:clamp(37px,9vw,62px);border-radius:50%;border:1px solid rgba(65,69,45,.12);box-shadow:0 3px 8px rgba(65,69,45,.07)}
+.dresscode-caption{font-size:.72rem;line-height:1.9;letter-spacing:.2em;text-transform:uppercase;color:#737b4d}
+.dresscode-leaf{font:2.2rem Georgia,serif;color:#858b5b;margin-top:18px;transform:rotate(-8deg)}
+@media(max-width:390px){.dresscode-section{padding:42px 10px}.dresscode-frame{padding:24px 10px}.dresscode-grid{gap:4px}.dresscode-art{height:185px}.dresscode-label{font-size:.68rem;letter-spacing:.14em;padding:7px 8px}.dresscode-card p{font-size:1rem}.dresscode-palette{gap:8px}}
+
 </style>
 </head>
 <body>
@@ -340,14 +362,50 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  </div>
 </section>
 
-<section class="paper">
- <div class="kicker">Dress code</div><h2>Código de vestimenta</h2><div class="rule"></div>
- <div class="dress-grid">
-  <div class="dress-card"><div class="dress-icon">♕</div><div class="kicker">Mujeres</div><p>Por definir</p></div>
-  <div class="dress-card"><div class="dress-icon">♔</div><div class="kicker">Hombres</div><p>Por definir</p></div>
+<section class="paper dresscode-section" id="vestimenta">
+ <div class="dresscode-frame">
+  <div class="kicker">Una celebración con estilo</div>
+  <h2>Código de vestimenta</h2>
+  <div class="dresscode-divider" aria-hidden="true"><span></span>✦<span></span></div>
+  <div class="dresscode-grid">
+   <article class="dresscode-card">
+    <svg class="dresscode-art" viewBox="0 0 240 300" role="img" aria-label="Ilustración de vestido largo formal asimétrico">
+     <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M92 35 Q88 22 103 18 L137 18 Q151 22 146 39 L139 69 Q153 87 159 116 L193 264 Q151 282 120 273 Q87 282 47 264 L81 116 Q87 88 101 69Z"/>
+      <path d="M92 35 Q105 55 125 55 Q145 55 146 35 L139 69 Q126 82 101 69Z"/>
+      <path d="M81 116 Q119 135 159 116 M74 148 Q119 166 167 148 M64 190 Q119 209 178 190 M54 232 Q119 250 187 232"/>
+      <path d="M101 69 Q112 86 120 98 Q132 84 139 69 M120 98 L120 270"/>
+      <path d="M83 117 Q100 128 120 130 M120 130 Q143 128 158 117" opacity=".55"/>
+     </g>
+    </svg>
+    <div class="dresscode-label">Mujeres</div>
+    <p>Vestido formal<br>o cóctel</p>
+   </article>
+   <div class="dresscode-centerline" aria-hidden="true"></div>
+   <article class="dresscode-card">
+    <svg class="dresscode-art" viewBox="0 0 240 300" role="img" aria-label="Ilustración de traje formal con camisa y corbata">
+     <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M82 37 L105 24 L135 24 L158 37 L190 55 L176 111 L170 260 Q120 277 70 260 L64 111 L50 55Z"/>
+      <path d="M105 24 L98 48 L120 83 L142 48 L135 24 M98 48 L77 73 L64 111 M142 48 L163 73 L176 111"/>
+      <path d="M98 48 L120 83 L111 121 L92 67 M142 48 L120 83 L129 121 L148 67"/>
+      <path d="M111 121 L120 103 L129 121 L124 205 L116 205Z"/>
+      <path d="M77 73 L96 89 L84 165 L69 155 M163 73 L144 89 L156 165 L171 155"/>
+      <path d="M70 260 L91 235 L120 245 L149 235 L170 260 M91 235 L94 216 M149 235 L146 216"/>
+      <path d="M79 179 L101 179 M139 179 L161 179 M80 194 L100 194 M140 194 L160 194"/>
+      <circle cx="132" cy="151" r="2.5" fill="currentColor"/><circle cx="132" cy="174" r="2.5" fill="currentColor"/>
+      <path d="M88 40 L101 32 M152 40 L139 32"/>
+     </g>
+    </svg>
+    <div class="dresscode-label">Hombres</div>
+    <p>Traje formal<br>y zapatos</p>
+   </article>
+  </div>
+  <div class="dresscode-palette" aria-label="Paleta de colores sugerida">
+   <span style="background:#f0e7d5"></span><span style="background:#d8c9a8"></span><span style="background:#b9b58b"></span><span style="background:#858b5b"></span><span style="background:#59633b"></span>
+  </div>
+  <div class="dresscode-caption">Paleta de colores sugerida<br>para nuestro día especial</div>
+  <div class="dresscode-leaf" aria-hidden="true">❧</div>
  </div>
- <div class="palette"><span class="swatch" style="background:#eee7d8"></span><span class="swatch" style="background:#d8cfb6"></span><span class="swatch" style="background:#a6a17b"></span><span class="swatch" style="background:#b6ad91"></span><span class="swatch" style="background:#59633b"></span></div>
- <p class="small">Paleta sugerida: lavanda, malva, marfil y ciruela.</p>
 </section>
 
 <section class="social">
