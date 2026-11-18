@@ -255,7 +255,6 @@ section,h1,h2,h3,p,.kicker,.date,.serif,.hashtag{color:#59633b}
  </div>
  <div class="rule" style="border-color:#c6bd9d"></div>
  <p class="serif" style="font-size:1.6rem">Para un día inolvidable</p>
- <button class="btn" style="color:#fdfbf4;border-color:#c6bd9d" id="calendarBtn">Agregar al calendario</button>
  <p class="small">Los mejores momentos aún están por llegar.</p>
 </section>
 
@@ -481,13 +480,6 @@ function updateCountdown(){
  document.getElementById('seconds').textContent=String(s).padStart(2,'0');
 }
 updateCountdown();setInterval(updateCountdown,1000);
-
-document.getElementById('calendarBtn').addEventListener('click',()=>{
- const start='20270205T150000',end='20270205T230000';
- const ics=['BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT','DTSTART:'+start,'DTEND:'+end,'SUMMARY:Boda de Allan y Paty','DESCRIPTION:Celebración de Allan y Paty','END:VEVENT','END:VCALENDAR'].join('\\r\\n');
- const blob=new Blob([ics],{type:'text/calendar'}),url=URL.createObjectURL(blob);
- const a=document.createElement('a');a.href=url;a.download='Allan-y-Paty.ics';a.click();URL.revokeObjectURL(url);
-});
 
 const audio=document.getElementById('audio');
 const musicToggle=document.getElementById('musicToggle');
