@@ -563,6 +563,33 @@ document.querySelectorAll('input[name="asistencia"]').forEach((radio) => {
 });
 syncRsvpAttendanceFields();
 
+// Detener la música al llegar al final de la invitación, aunque el invitado no envíe el RSVP.
+const invitationFooter = document.querySelector('.footer');
+let endOfInvitationReached = false;
+function stopMusicAtInvitationEnd(){
+ if (endOfInvitationReached) return;
+ const pageBottom = window.scrollY + window.innerHeight;
+ const documentBottom = document.documentElement.scrollHeight;
+ if (pageBottom >= documentBottom - 24) {
+  endOfInvitationReached = true;
+  audio.pause();
+  syncMusicButton();
+ }
+}
+window.addEventListener('scroll', stopMusicAtInvitationEnd, { passive: true });
+window.addEventListener('resize', stopMusicAtInvitationEnd);
+if (invitationFooter && 'IntersectionObserver' in window) {
+ const invitationEndObserver = new IntersectionObserver((entries) => {
+  if (entries.some(entry => entry.isIntersecting)) {
+   endOfInvitationReached = true;
+   audio.pause();
+   syncMusicButton();
+   invitationEndObserver.disconnect();
+  }
+ }, { threshold: 0.15 });
+ invitationEndObserver.observe(invitationFooter);
+}
+
 rsvpForm.addEventListener('submit', () => {
  // Mantener la música detenida durante y después del envío del registro.
  audio.pause();
