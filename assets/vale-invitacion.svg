@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
+<title id="title">Vale de Invitación de Allan y Paty</title><desc id="desc">Vale elegante en tonos crema, verde olivo y dorado, con el mensaje de invitación digital y confirmación de asistencia.</desc>
+<defs>
+ <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fbf8ef"/><stop offset="1" stop-color="#eee7d8"/></linearGradient>
+ <linearGradient id="olive" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#414b27"/><stop offset="1" stop-color="#687447"/></linearGradient>
+ <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#41452d" flood-opacity=".16"/></filter>
+</defs>
+<rect x="34" y="38" width="1532" height="724" rx="34" fill="url(#paper)" stroke="#59633b" stroke-width="12" filter="url(#shadow)"/>
+<rect x="55" y="59" width="1490" height="682" rx="25" fill="none" stroke="#b99b54" stroke-width="3"/>
+<path d="M100 105h75l-75 75z M1500 105h-75l75 75z M100 695h75l-75-75z M1500 695h-75l75-75z" fill="#59633b"/>
+<path d="M800 75V725" stroke="#59633b" stroke-width="4" stroke-dasharray="18 16"/>
+<g fill="#414b27" text-anchor="middle">
+ <text x="400" y="300" font-family="cursive" font-style="italic" font-size="108">Vale de</text>
+ <text x="400" y="420" font-family="cursive" font-style="italic" font-size="118">Invitación</text>
+ <path d="M240 468H365 M435 468H560" stroke="#a88c4b" stroke-width="3"/>
+ <path d="M400 451 C375 422 347 458 400 496 C453 458 425 422 400 451Z" fill="none" stroke="#a88c4b" stroke-width="4"/>
+ <text x="400" y="560" font-family="Georgia,serif" font-size="32" letter-spacing="5">ACCESO ESPECIAL A</text>
+ <text x="400" y="608" font-family="Georgia,serif" font-size="32" letter-spacing="5">NUESTRA BODA</text>
+</g>
+<g fill="none" stroke="#a88c4b" stroke-width="9">
+ <ellipse cx="370" cy="665" rx="55" ry="30" transform="rotate(-25 370 665)"/>
+ <ellipse cx="430" cy="665" rx="55" ry="30" transform="rotate(25 430 665)"/>
+</g>
+<g>
+ <path d="M890 190H1510V350H890Q865 350 865 325V215Q865 190 890 190Z" fill="url(#olive)" stroke="#b99b54" stroke-width="4"/>
+ <path d="M960 225l55 45-55 45-55-45z" fill="#f8f4e9" stroke="#b99b54" stroke-width="4"/>
+ <path d="M960 251c-12-17-31-1 0 25 31-26 12-42 0-25z" fill="#59633b"/>
+ <text x="1240" y="285" text-anchor="middle" fill="#fbf8ef" font-family="Georgia,serif" font-size="49" letter-spacing="5">INVITACIÓN DIGITAL</text>
+ <path d="M955 410H1100 M1300 410H1445" stroke="#59633b" stroke-width="3"/>
+ <path d="M1175 393l18 17-18 17-18-17z" fill="#59633b"/>
+ <text x="1200" y="500" text-anchor="middle" fill="#41452d" font-family="Georgia,serif" font-size="43" font-style="italic">Confirma tu asistencia</text>
+ <text x="1200" y="558" text-anchor="middle" fill="#41452d" font-family="Georgia,serif" font-size="43" font-style="italic">en nuestra invitación</text>
+ <path d="M955 630H1100 M1300 630H1445" stroke="#59633b" stroke-width="3"/>
+ <path d="M1175 613l18 17-18 17-18-17z" fill="#59633b"/>
+</g>
+</svg>
